@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/rootFragment">
+
+    <fragment
+        android:id="@+id/rootFragment"
+        android:name="com.navigation.vadik.navigation.RootFragment"
+        android:label="fragment_root"
+        tools:layout="@layout/fragment_root" >
+        <action
+            android:id="@+id/action_from_root_to_settings"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_from_root_to_input"
+            app:destination="@id/inputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.navigation.vadik.navigation.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/inputFragment"
+        android:name="com.navigation.vadik.navigation.InputFragment"
+        android:label="fragment_input"
+        tools:layout="@layout/fragment_input" >
+        <action
+            android:id="@+id/action_from_input_to_details"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.navigation.vadik.navigation.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="userName"
+            android:defaultValue="Default"
+            app:type="string" />
+    </fragment>
+</navigation>
