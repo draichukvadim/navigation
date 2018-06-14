@@ -1,4 +1,4 @@
-package com.navigation.vadik.navigation
+package com.navigation.vadik.navigation.view
 
 
 import android.os.Bundle
@@ -6,7 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_details.*
+import android.widget.TextView
+import com.navigation.vadik.navigation.R
 
 class DetailsFragment : Fragment() {
 
@@ -17,7 +18,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvUser.text = arguments?.getString("userName")
+        view.findViewById<TextView>(R.id.tvUser).text = arguments?.getString("userName")
     }
 
 }

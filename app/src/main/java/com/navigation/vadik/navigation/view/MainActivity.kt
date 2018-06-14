@@ -1,7 +1,8 @@
-package com.navigation.vadik.navigation
+package com.navigation.vadik.navigation.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.navigation.vadik.navigation.R
 
 class MainActivity : AppCompatActivity() {
 

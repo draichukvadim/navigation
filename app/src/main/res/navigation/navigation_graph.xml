@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/rootFragment"
-        android:name="com.navigation.vadik.navigation.RootFragment"
+        android:name="com.navigation.vadik.navigation.view.RootFragment"
         android:label="fragment_root"
         tools:layout="@layout/fragment_root" >
         <action
@@ -21,12 +21,12 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.navigation.vadik.navigation.SettingsFragment"
+        android:name="com.navigation.vadik.navigation.view.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/inputFragment"
-        android:name="com.navigation.vadik.navigation.InputFragment"
+        android:name="com.navigation.vadik.navigation.view.InputFragment"
         android:label="fragment_input"
         tools:layout="@layout/fragment_input" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.navigation.vadik.navigation.DetailsFragment"
+        android:name="com.navigation.vadik.navigation.view.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
