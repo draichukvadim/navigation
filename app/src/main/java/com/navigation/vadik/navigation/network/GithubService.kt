@@ -1,6 +1,6 @@
 package com.navigation.vadik.navigation.network
 
-import com.navigation.vadik.navigation.data.User
+import com.navigation.vadik.navigation.db.UserEntity
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface GithubService {
     @GET("/users")
-    fun getUsers(@Query("since") sinceUserId: Long, @Query("per_page") perPage: Int): Single<List<User>>
+    fun getUsers(@Query("since") sinceUserId: Long, @Query("per_page") perPage: Int): Single<List<UserEntity>>
 
     companion object {
         fun getService(): GithubService {

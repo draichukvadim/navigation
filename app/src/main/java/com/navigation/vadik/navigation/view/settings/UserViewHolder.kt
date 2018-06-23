@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.navigation.vadik.navigation.R
-import com.navigation.vadik.navigation.data.User
+import com.navigation.vadik.navigation.db.UserEntity
 
 class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val tvId: TextView = view.findViewById(R.id.tvId)
     private val tvName: TextView = view.findViewById(R.id.tvName)
 
-    private var user: User? = null
+    private var user: UserEntity? = null
 
-    fun bind(user: User?) {
+    fun bind(user: UserEntity?) {
         if (user == null) {
             tvId.text = "Loading..."
         } else {
@@ -22,7 +22,7 @@ class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    private fun showUserData(user: User) {
+    private fun showUserData(user: UserEntity) {
         this.user = user
         tvId.text = user.id.toString()
         tvName.text = user.login

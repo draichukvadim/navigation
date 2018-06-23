@@ -2,6 +2,8 @@ package com.navigation.vadik.navigation.view.settings
 
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.paging.PagedList
 import android.os.Bundle
@@ -12,11 +14,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.navigation.vadik.navigation.R
-import com.navigation.vadik.navigation.data.User
+import com.navigation.vadik.navigation.db.UserEntity
+import com.navigation.vadik.navigation.db.UsersDatabase
+import com.navigation.vadik.navigation.network.GithubService
+import com.navigation.vadik.navigation.repository.UserRepositoryImpl
 import com.navigation.vadik.navigation.view_model.UsersViewModel
 
 class SettingsFragment : Fragment() {
-    private val usersViewModel: UsersViewModel by lazy { ViewModelProviders.of(this).get(UsersViewModel::class.java) }
+    private lateinit var usersViewModel: UsersViewModel
 
     private lateinit var userAdapter: UserAdapter
 
@@ -27,14 +32,25 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        this.usersViewModel = getViewModel()
+
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         userAdapter = UserAdapter()
-        view.findViewById<RecyclerView>(R.id.rvUsers).layoutManager = linearLayoutManager
-        view.findViewById<RecyclerView>(R.id.rvUsers).adapter = userAdapter
-        usersViewModel.userList.observe(this, Observer<PagedList<User>> { userAdapter.submitList(it) })
-        initAdapter()
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rvUsers)
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = userAdapter
+        usersViewModel.userList.observe(this, Observer<PagedList<UserEntity>> { userAdapter.submitList(it) })
     }
 
-    private fun initAdapter() {
+    private fun getViewModel(): UsersViewModel {
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val db = UsersDatabase.create(requireContext())
+                val service = GithubService.getService()
+                val repository = UserRepositoryImpl(db, service)
+                @Suppress("UNCHECKED_CAST")
+                return UsersViewModel(repository) as T
+            }
+        })[UsersViewModel::class.java]
     }
 }
